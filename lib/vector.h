@@ -12,22 +12,24 @@ typedef struct Vector
 	ValuesInfo* valuesInfo;
 } Vector;
 
-Vector* VectorFromArray(
-		ValuesInfo* valuesInfo,
-		int dim,
-		void* array
-		);
-
 Vector* VectorInit(
 		ValuesInfo* valuesInfo,
-		int dim
+		const int dim
 		);
 
-void* VectorGet(Vector* vector, int index);
-void VectorSet(Vector* vector, int index, void* value);
 
-void VectorSum(Vector* vector1, Vector* vector2, Vector* res);
-void* VectorDot(Vector* vector1, Vector* vector2); // free after usage
+Vector* VectorFromArray(
+		ValuesInfo* valuesInfo,
+		const int dim,
+		const void* array
+		);
+
 void VectorFree(Vector** vector);
+
+const void* VectorGet(const Vector* vector, const int index);
+void VectorSet(Vector* vector, const int index, const void* value);
+
+void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res);
+void* VectorDot(const Vector* vector1, const Vector* vector2); // free after usage
 
 #endif // VECTOR_H

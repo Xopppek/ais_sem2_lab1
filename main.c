@@ -49,10 +49,22 @@ void InputComplex(Complex* z){
 	z->Im=im;
 }
 
-
 int main(){
 	InitIntegerValuesInfo();
 	InitComplexValuesInfo();
+
+	/*
+	// const Get test	
+	Integer x = {1};
+	Vector* v = VectorInit(integerInfo, 2);
+	VectorSet(v, 0, &x);
+	VectorPrintInteger(v);
+	//Integer* t = VectorGet(v, 0);
+	//t->value = 2;
+	printf("%d\n", ((Integer*) VectorGet(v, 0))->value);
+	VectorPrintInteger(v);
+	VectorFree(&v);
+	*/
 
 	PrintMainKeys();
 

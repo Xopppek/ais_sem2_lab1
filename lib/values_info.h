@@ -6,16 +6,16 @@
 typedef struct ValuesInfo
 {
 	size_t size;
-	void (*Sum)(void* a, void* b, void* res);
-	void (*Mult)(void* a, void* b, void* res);
-	void (*Set)(void* ptr, void* value);
+	void (*Sum)(const void* a, const void* b, void* res);
+	void (*Mult)(const void* a, const void* b, void* res);
+	void (*Set)(void* ptr, const void* value);
 } ValuesInfo;
 
 ValuesInfo* InitValuesInfo(
 		size_t size,
-		void (*Sum)(void* a, void* b, void* res),
-		void (*Mult)(void* a, void* b, void* res),
-		void (*Set)(void* ptr, void* value)
+		void (*Sum)(const void* a, const void* b, void* res),
+		void (*Mult)(const void* a, const void* b, void* res),
+		void (*Set)(void* ptr, const void* value)
 		);
 
 

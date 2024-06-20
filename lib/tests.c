@@ -122,6 +122,9 @@ void RunTests(){
 
 				vectors[2] = VectorFromArray(integerInfo, 3, integers);
 				vectors[3] = VectorFromArray(integerInfo, 3, integers + 5);
+				
+				assert((vectors[2])->dim == 3);
+				assert((vectors[3])->dim == 3);
 
 				assert(((Integer*) VectorGet(vectors[2], 0))->value == -5);
 				assert(((Integer*) VectorGet(vectors[2], 1))->value == -4);

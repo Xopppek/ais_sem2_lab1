@@ -1,6 +1,6 @@
 #include "vector.h"
 
-Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
+Vector* VectorInit(ValuesInfo* valuesInfo, const int dim){
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	Vector* vector = (Vector*) malloc(sizeof(Vector));
@@ -14,8 +14,8 @@ Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
 
 Vector* VectorFromArray(
 		ValuesInfo* valuesInfo, 
-		int dim, 
-		void* array
+		const int dim, 
+		const void* array
 		){
 	// should check if array type corresponds with
 	// valuesInfo but I don't know how to do it
@@ -50,7 +50,7 @@ void VectorFreeData(Vector* vector){
 	// data in res vector for functions like Sum
 }
 
-void* VectorGet(Vector* vector, int index){
+const void* VectorGet(const Vector* vector, const int index){
 	// the user shouldn't be able to change
 	// original element (instead use VectorSet()) 
 	// so I had ad idea to return a copy
@@ -66,7 +66,7 @@ void* VectorGet(Vector* vector, int index){
 	return vector->data + index * vector->valuesInfo->size; 	
 }
 
-void VectorSet(Vector* vector, int index, void* value){
+void VectorSet(Vector* vector, const int index, const void* value){
 	// should also somehow check if vector->valuesInfo
 	// corresponds with value, but how?
 	if (vector == NULL)
@@ -79,7 +79,7 @@ void VectorSet(Vector* vector, int index, void* value){
 			index * vector->valuesInfo->size, value);
 }
 
-void VectorSum(Vector* vector1, Vector* vector2, Vector* res){
+void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res){
 	if ((vector1 == NULL) || (vector2 == NULL) || (res == NULL))
 		return; // NULL_PTR
 	if ((vector1->data == NULL) || (vector2->data == NULL))
@@ -103,7 +103,7 @@ void VectorSum(Vector* vector1, Vector* vector2, Vector* res){
 				);	
 }
 
-void* VectorDot(Vector* vector1, Vector* vector2){
+void* VectorDot(const Vector* vector1, const Vector* vector2){
 	// there user is forced to free memoty by himself
 	// I didn't use (Vector*, Vector*, void* res) like before
 	// (it would be more clear for user to free void* res created
