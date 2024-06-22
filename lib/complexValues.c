@@ -1,15 +1,19 @@
 #include "complexValues.h"
 
 void ComplexSum(const void* a, const void* b, void* res){
-	((Complex*) res)->Re = ((Complex*) a)->Re + ((Complex*) b)->Re;
-	((Complex*) res)->Im = ((Complex*) a)->Im + ((Complex*) b)->Im;
+	Complex* a_ = (Complex*) a;
+	Complex* b_ = (Complex*) b;
+	Complex* res_ = (Complex*) res;
+	res_->Re = a_->Re + b_->Re;
+	res_->Im = a_->Im + b_->Im;
 }
 
 void ComplexMult(const void* a, const void* b, void* res){
-	((Complex*) res)->Re = ((Complex*) a)->Re * ((Complex*) b)->Re
-	       		     - ((Complex*) a)->Im * ((Complex*) b)->Im;
-    	((Complex*) res)->Im = ((Complex*) a)->Re * ((Complex*) b)->Im 
-			     + ((Complex*) b)->Re * ((Complex*) a)->Im;
+	Complex* a_ = (Complex*) a;
+	Complex* b_ = (Complex*) b;
+	Complex* res_ = (Complex*) res;
+	res_->Re = a_->Re * b_->Re - a_->Im * b_->Im;
+    res_->Im = a_->Re * b_->Im + b_->Re * a_->Im;
 }
 
 void ComplexSet(void* ptr, const void* value){
@@ -17,9 +21,9 @@ void ComplexSet(void* ptr, const void* value){
 	((Complex*) ptr)->Im = ((Complex*) value)->Im; 
 }
 
-ValuesInfo* complexInfo = NULL;
+static ValuesInfo* complexInfo = NULL;
 
-void InitComplexValuesInfo(){
+ValuesInfo* GetComplexValuesInfo(){
 	if (complexInfo == NULL)
 		complexInfo = InitValuesInfo(
 				sizeof(Complex),
@@ -27,4 +31,5 @@ void InitComplexValuesInfo(){
 				ComplexMult,
 				ComplexSet
 				);
+	return complexInfo;
 }

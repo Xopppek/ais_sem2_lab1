@@ -12,9 +12,9 @@ void IntegerSet(void* ptr, const void* value){
 	((Integer*) ptr)->value = ((Integer*) value)->value;
 }
 
-ValuesInfo* integerInfo = NULL;
+static ValuesInfo* integerInfo = NULL;
 
-void InitIntegerValuesInfo(){
+ValuesInfo* GetIntegerValuesInfo(){
 	if (integerInfo == NULL)
 		integerInfo = InitValuesInfo(
 				sizeof(Integer),
@@ -22,4 +22,5 @@ void InitIntegerValuesInfo(){
 				IntegerMult,
 				IntegerSet
 				);
+	return integerInfo;
 }

@@ -1,6 +1,8 @@
 #include "lib/vector.h"
 #include "lib/utils.h"
 #include "lib/tests.h"
+#include "lib/integerValues.h"
+#include "lib/complexValues.h"
 #include <stdio.h>
 
 enum{
@@ -50,8 +52,8 @@ void InputComplex(Complex* z){
 }
 
 int main(){
-	InitIntegerValuesInfo();
-	InitComplexValuesInfo();
+	ValuesInfo* integerInfo = GetIntegerValuesInfo();
+	ValuesInfo* complexInfo = GetComplexValuesInfo();
 
 	/*
 	// const Get test	

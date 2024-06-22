@@ -1,4 +1,6 @@
 #include "vector.h"
+#include <stdlib.h>
+#include <string.h>
 
 Vector* VectorInit(ValuesInfo* valuesInfo, const int dim){
 	if (dim < 1)

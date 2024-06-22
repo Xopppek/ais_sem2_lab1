@@ -1,8 +1,13 @@
 #include "tests.h"
+#include <stdio.h>
+#include <assert.h>
+#include "integerValues.h"
+#include "complexValues.h"
+#include "utils.h"
 
 void RunTests(){
-	InitIntegerValuesInfo();
-	InitComplexValuesInfo();
+	ValuesInfo* integerInfo = GetIntegerValuesInfo();
+	ValuesInfo* complexInfo = GetComplexValuesInfo();
 	
 	int num_vectors = 11;
 

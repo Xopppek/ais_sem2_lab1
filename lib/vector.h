@@ -2,8 +2,6 @@
 #define VECTOR_H 
 
 #include "values_info.h"
-#include <stdlib.h>
-#include <string.h>
 
 typedef struct Vector
 {
@@ -16,7 +14,6 @@ Vector* VectorInit(
 		ValuesInfo* valuesInfo,
 		const int dim
 		);
-
 
 Vector* VectorFromArray(
 		ValuesInfo* valuesInfo,

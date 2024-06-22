@@ -9,8 +9,6 @@ typedef struct
 	int Im;
 } Complex;
 
-extern ValuesInfo* complexInfo;
-
-void InitComplexValuesInfo();
+ValuesInfo* GetComplexValuesInfo(); //get const complex info*
 
 #endif // COMPLEX_VALUES_H
