@@ -7,8 +7,7 @@ typedef struct Vector Vector;
 
 Vector* VectorInit(ValuesInfo* valuesInfo, int dim);
 
-Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, 
-										const void* array);
+Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array);
 
 void VectorFree(Vector** vector);
 

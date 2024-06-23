@@ -21,8 +21,7 @@ Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
 	return vector;
 }
 
-Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, 
-										const void* array){
+Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array){
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	if (array == NULL)
