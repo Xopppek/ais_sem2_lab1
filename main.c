@@ -4,6 +4,7 @@
 #include "lib/integerValues.h"
 #include "lib/complexValues.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 enum{
 	TESTS,

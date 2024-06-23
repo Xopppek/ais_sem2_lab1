@@ -1,4 +1,5 @@
 #include "complexValues.h"
+#include <stdlib.h>
 
 void ComplexSum(const void* a, const void* b, void* res){
 	Complex* a_ = (Complex*) a;
@@ -24,12 +25,12 @@ void ComplexSet(void* ptr, const void* value){
 static ValuesInfo* complexInfo = NULL;
 
 ValuesInfo* GetComplexValuesInfo(){
-	if (complexInfo == NULL)
-		complexInfo = InitValuesInfo(
-				sizeof(Complex),
-				ComplexSum,
-				ComplexMult,
-				ComplexSet
-				);
+	if (complexInfo == NULL){
+		complexInfo = (ValuesInfo*) malloc(sizeof(ValuesInfo));
+		complexInfo->size = sizeof(Complex);
+		complexInfo->Sum = ComplexSum;
+		complexInfo->Mult = ComplexMult;
+		complexInfo->Set = ComplexSet;
+	}
 	return complexInfo;
 }

@@ -1,6 +1,7 @@
 #include "tests.h"
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "integerValues.h"
 #include "complexValues.h"
 #include "utils.h"
