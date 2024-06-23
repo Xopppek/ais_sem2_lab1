@@ -144,8 +144,8 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info = (vectors[v_index])->valuesInfo;
-				for (int i = 0; i < (vectors[v_index])->dim; i++){
+				info = VectorGetValuesInfo(vectors[v_index]);
+				for (int i = 0; i < VectorGetDim(vectors[v_index]); i++){
 					printf("| Insert %d element: ", i+1);
 					if (info == integerInfo){
 						InputInteger(&inputInteger);
@@ -171,7 +171,7 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info = (vectors[v_index])->valuesInfo;
+				info = VectorGetValuesInfo(vectors[v_index]);
 				printf("Vector %d = ", input_v_index);
 				if (info == integerInfo)
 					VectorPrintInteger(vectors[v_index]);
@@ -196,7 +196,7 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info1 = (vectors[v_index1])->valuesInfo;
+				info1 = VectorGetValuesInfo(vectors[v_index1]);
 				printf("| Vector a = ");
 				if (info1 == integerInfo)
 					VectorPrintInteger(vectors[v_index1]);
@@ -210,13 +210,13 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info2 = (vectors[v_index2])->valuesInfo;
+				info2 = VectorGetValuesInfo(vectors[v_index2]);
 				printf("| Vector b = ");
 				if (info2 == integerInfo)
 					VectorPrintInteger(vectors[v_index2]);
 				else if (info2 == complexInfo)
 					VectorPrintComplex(vectors[v_index2]);
-				if ((vectors[v_index1])->dim != (vectors[v_index2])->dim){
+				if (VectorGetDim(vectors[v_index1]) != VectorGetDim(vectors[v_index2])){
 					printf("|| Dimentions do not correspond\n\n");
 					continue;
 				}
@@ -233,7 +233,7 @@ int main(){
 						continue;
 					}		
 					VectorFree(vectors + res_v_index);
-					vectors[res_v_index] = VectorInit(info1, (vectors[v_index1])->dim);
+					vectors[res_v_index] = VectorInit(info1, VectorGetDim(vectors[v_index1]));
 					VectorSum(vectors[v_index1], vectors[v_index2], vectors[res_v_index]);
 					printf("Vector %d = Vector %d + Vector %d = ", res_v_index+1,
 							v_index1+1, v_index2+1);
@@ -242,7 +242,7 @@ int main(){
 					else if (info1 == complexInfo)
 						VectorPrintComplex(vectors[res_v_index]);
 				}else if (type == 2){
-					sum = VectorInit(info1, (vectors[v_index1])->dim);		
+					sum = VectorInit(info1, VectorGetDim(vectors[v_index1]));		
 					VectorSum(vectors[v_index1], vectors[v_index2], sum);
 					printf("Vector %d + Vector %d = ", v_index1+1, v_index2+1);
 					if (info1 == integerInfo)
@@ -263,7 +263,7 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info1 = (vectors[v_index1])->valuesInfo;
+				info1 = VectorGetValuesInfo(vectors[v_index1]);
 				printf("| Vector a = ");
 				if (info1 == integerInfo)
 					VectorPrintInteger(vectors[v_index1]);
@@ -277,13 +277,13 @@ int main(){
 					printf("|| Create it first, or choose another index\n\n");
 					continue;
 				}
-				info2 = (vectors[v_index2])->valuesInfo;
+				info2 = VectorGetValuesInfo(vectors[v_index2]);
 				printf("| Vector b = ");
 				if (info2 == integerInfo)
 					VectorPrintInteger(vectors[v_index2]);
 				else if (info2 == complexInfo)
 					VectorPrintComplex(vectors[v_index2]);
-				if ((vectors[v_index1])->dim != (vectors[v_index2])->dim){
+				if (VectorGetDim(vectors[v_index1]) != VectorGetDim(vectors[v_index2])){
 					printf("|| Dimentions do not correspond\n\n");
 					continue;
 				}

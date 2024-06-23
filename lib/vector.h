@@ -3,28 +3,20 @@
 
 #include "values_info.h"
 
-typedef struct Vector
-{
-	int dim;
-	void* data;
-	ValuesInfo* valuesInfo;
-} Vector;
+typedef struct Vector Vector;
 
-Vector* VectorInit(
-		ValuesInfo* valuesInfo,
-		const int dim
-		);
+Vector* VectorInit(ValuesInfo* valuesInfo, int dim);
 
-Vector* VectorFromArray(
-		ValuesInfo* valuesInfo,
-		const int dim,
-		const void* array
-		);
+Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, 
+										const void* array);
 
 void VectorFree(Vector** vector);
 
-const void* VectorGet(const Vector* vector, const int index);
-void VectorSet(Vector* vector, const int index, const void* value);
+const void* VectorGet(const Vector* vector, int index);
+void VectorSet(Vector* vector, int index, const void* value);
+
+int VectorGetDim(const Vector* vector);
+ValuesInfo* VectorGetValuesInfo(const Vector* vector);
 
 void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res);
 void VectorDot(const Vector* vector1, const Vector* vector2, void* res);

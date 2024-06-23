@@ -49,32 +49,32 @@ void RunTests(){
 			vectors[i] = VectorInit(complexInfo, dims[i]);
 
 		if (i < 2){ // correct dim = 2 integer
-			assert(vectors[i]->dim == 2);
-			assert(vectors[i]->valuesInfo == integerInfo);
+			assert(VectorGetDim(vectors[i]) == 2);
+			assert(VectorGetValuesInfo(vectors[i]) == integerInfo);
 		}
 		else if (i < 4){ // correct dim = 3 integer
-			assert(vectors[i]->dim == 3);
-			assert(vectors[i]->valuesInfo == integerInfo);
+			assert(VectorGetDim(vectors[i]) == 3);
+			assert(VectorGetValuesInfo(vectors[i]) == integerInfo);
 		}
 		else if (i == 4){
-			assert(vectors[i]->dim == 2);
-			assert(vectors[i]->valuesInfo == complexInfo);
+			assert(VectorGetDim(vectors[i]) == 2);
+			assert(VectorGetValuesInfo(vectors[i]) == complexInfo);
 		}
 		else if (i == 5) // incorrect dim = 0
 			assert(vectors[i] == NULL);	
 		else if (i == 6){ // correct dim = 1
-			assert(vectors[i]->dim == 1);	
-			assert(vectors[i]->valuesInfo == integerInfo);
+			assert(VectorGetDim(vectors[i]) == 1);	
+			assert(VectorGetValuesInfo(vectors[i]) == integerInfo);
 		}
 		else if (i == 7) // incorrect dim < 0
 			assert(vectors[i] == NULL);
 		else if (i < 9){ // correct dim = 4 integer
-			assert(vectors[i]->dim == 4);
-			assert(vectors[i]->valuesInfo == integerInfo);
+			assert(VectorGetDim(vectors[i]) == 4);
+			assert(VectorGetValuesInfo(vectors[i]) == integerInfo);
 		}
 		else{ // correct dim = 4 complex
-			assert(vectors[i]->dim == 4);
-			assert(vectors[i]->valuesInfo == complexInfo);
+			assert(VectorGetDim(vectors[i]) == 4);
+			assert(VectorGetValuesInfo(vectors[i]) == complexInfo);
 		}
 
 			
@@ -128,9 +128,9 @@ void RunTests(){
 
 				vectors[2] = VectorFromArray(integerInfo, 3, integers);
 				vectors[3] = VectorFromArray(integerInfo, 3, integers + 5);
-				
-				assert((vectors[2])->dim == 3);
-				assert((vectors[3])->dim == 3);
+
+				assert(VectorGetDim(vectors[2]) == 3);
+				assert(VectorGetDim(vectors[3]) == 3);
 
 				assert(((Integer*) VectorGet(vectors[2], 0))->value == -5);
 				assert(((Integer*) VectorGet(vectors[2], 1))->value == -4);

@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void VectorPrintInteger(Vector* vector){
-	int n = vector->dim;
+	int n = VectorGetDim(vector);
 	printf("[");
 	for (int i = 0; i < n; i++){
 		if (i != n-1)
@@ -15,7 +15,7 @@ void VectorPrintInteger(Vector* vector){
 }
 
 void VectorPrintComplex(Vector* vector){
-	int n = vector->dim;
+	int n = VectorGetDim(vector);
 	printf("[");
 	for (int i = 0; i < n; i++){
 		if (i != n-1)

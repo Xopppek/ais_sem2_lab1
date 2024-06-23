@@ -2,7 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-Vector* VectorInit(ValuesInfo* valuesInfo, const int dim){
+struct Vector
+{
+	int dim;
+	void* data;
+	ValuesInfo* valuesInfo;
+};
+
+Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	Vector* vector = (Vector*) malloc(sizeof(Vector));
@@ -14,11 +21,8 @@ Vector* VectorInit(ValuesInfo* valuesInfo, const int dim){
 	return vector;
 }
 
-Vector* VectorFromArray(
-		ValuesInfo* valuesInfo, 
-		const int dim, 
-		const void* array
-		){
+Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, 
+										const void* array){
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	if (array == NULL)
@@ -50,7 +54,7 @@ void VectorFreeData(Vector* vector){
 	// data in res vector for functions like Sum
 }
 
-const void* VectorGet(const Vector* vector, const int index){
+const void* VectorGet(const Vector* vector, int index){
 	// the user shouldn't be able to change
 	// original element (instead use VectorSet()) 
 	// so I had ad idea to return a copy
@@ -66,7 +70,7 @@ const void* VectorGet(const Vector* vector, const int index){
 	return vector->data + index * vector->valuesInfo->size; 	
 }
 
-void VectorSet(Vector* vector, const int index, const void* value){
+void VectorSet(Vector* vector, int index, const void* value){
 	// should also somehow check if vector->valuesInfo
 	// corresponds with value, but how?
 	if (vector == NULL)
@@ -77,6 +81,14 @@ void VectorSet(Vector* vector, const int index, const void* value){
 		return; // OUT_OF_RANGE
 	vector->valuesInfo->Set(vector->data + 
 			index * vector->valuesInfo->size, value);
+}
+
+int VectorGetDim(const Vector* vector){
+	return vector->dim;
+}
+
+ValuesInfo* VectorGetValuesInfo(const Vector* vector){
+	return vector->valuesInfo;
 }
 
 void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res){
