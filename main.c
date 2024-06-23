@@ -156,10 +156,7 @@ int main(){
 					}
 				}
 				printf("Vector %d = ", input_v_index);
-				if (info == integerInfo)
-					VectorPrintInteger(vectors[v_index]);
-				else if (info == complexInfo)
-					VectorPrintComplex(vectors[v_index]);
+				VectorPrint(vectors[v_index]);
 				printf("\n");
 				break;
 			case(GET_VALUES):
@@ -173,10 +170,7 @@ int main(){
 				}
 				info = VectorGetValuesInfo(vectors[v_index]);
 				printf("Vector %d = ", input_v_index);
-				if (info == integerInfo)
-					VectorPrintInteger(vectors[v_index]);
-				else if (info == complexInfo)
-					VectorPrintComplex(vectors[v_index]);	
+				VectorPrint(vectors[v_index]);	
 				printf("\n");
 				break;
 			case(SUM):
@@ -198,10 +192,7 @@ int main(){
 				}
 				info1 = VectorGetValuesInfo(vectors[v_index1]);
 				printf("| Vector a = ");
-				if (info1 == integerInfo)
-					VectorPrintInteger(vectors[v_index1]);
-				else if (info1 == complexInfo)
-					VectorPrintComplex(vectors[v_index1]);
+				VectorPrint(vectors[v_index1]);
 				printf("| Vector b\n");
 				InputVectorIndex(&input_v_index);
 				v_index2 = input_v_index - 1;
@@ -212,10 +203,7 @@ int main(){
 				}
 				info2 = VectorGetValuesInfo(vectors[v_index2]);
 				printf("| Vector b = ");
-				if (info2 == integerInfo)
-					VectorPrintInteger(vectors[v_index2]);
-				else if (info2 == complexInfo)
-					VectorPrintComplex(vectors[v_index2]);
+				VectorPrint(vectors[v_index2]);
 				if (VectorGetDim(vectors[v_index1]) != VectorGetDim(vectors[v_index2])){
 					printf("|| Dimentions do not correspond\n\n");
 					continue;
@@ -237,18 +225,12 @@ int main(){
 					VectorSum(vectors[v_index1], vectors[v_index2], vectors[res_v_index]);
 					printf("Vector %d = Vector %d + Vector %d = ", res_v_index+1,
 							v_index1+1, v_index2+1);
-					if (info1 == integerInfo)
-						VectorPrintInteger(vectors[res_v_index]);
-					else if (info1 == complexInfo)
-						VectorPrintComplex(vectors[res_v_index]);
+					VectorPrint(vectors[res_v_index]);
 				}else if (type == 2){
 					sum = VectorInit(info1, VectorGetDim(vectors[v_index1]));		
 					VectorSum(vectors[v_index1], vectors[v_index2], sum);
 					printf("Vector %d + Vector %d = ", v_index1+1, v_index2+1);
-					if (info1 == integerInfo)
-						VectorPrintInteger(sum);
-					else if (info1 == complexInfo)
-						VectorPrintComplex(sum);
+					VectorPrint(sum);
 					VectorFree(&sum);
 				}
 				printf("\n");
@@ -265,10 +247,7 @@ int main(){
 				}
 				info1 = VectorGetValuesInfo(vectors[v_index1]);
 				printf("| Vector a = ");
-				if (info1 == integerInfo)
-					VectorPrintInteger(vectors[v_index1]);
-				else if (info1 == complexInfo)
-					VectorPrintComplex(vectors[v_index1]);
+				VectorPrint(vectors[v_index1]);
 				printf("| Vector b\n");
 				InputVectorIndex(&input_v_index);
 				v_index2 = input_v_index - 1;
@@ -279,10 +258,7 @@ int main(){
 				}
 				info2 = VectorGetValuesInfo(vectors[v_index2]);
 				printf("| Vector b = ");
-				if (info2 == integerInfo)
-					VectorPrintInteger(vectors[v_index2]);
-				else if (info2 == complexInfo)
-					VectorPrintComplex(vectors[v_index2]);
+				VectorPrint(vectors[v_index2]);
 				if (VectorGetDim(vectors[v_index1]) != VectorGetDim(vectors[v_index2])){
 					printf("|| Dimentions do not correspond\n\n");
 					continue;

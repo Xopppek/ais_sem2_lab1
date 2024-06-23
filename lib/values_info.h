@@ -8,6 +8,7 @@ typedef struct ValuesInfo
 	void (*Sum)(const void* a, const void* b, void* res);
 	void (*Mult)(const void* a, const void* b, void* res);
 	void (*Set)(void* ptr, const void* value);
+	void (*Print)(const void* value);
 } ValuesInfo;
 
 #endif // VALUES_INFO_H

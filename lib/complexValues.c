@@ -1,5 +1,6 @@
 #include "complexValues.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void ComplexSum(const void* a, const void* b, void* res){
 	Complex* a_ = (Complex*) a;
@@ -22,6 +23,32 @@ void ComplexSet(void* ptr, const void* value){
 	((Complex*) ptr)->Im = ((Complex*) value)->Im; 
 }
 
+void ComplexPrint(const void* value){
+	Complex* z = (Complex*) value;
+	if (z->Im == 0)
+		printf("%d", z->Re);
+	else
+		if (z->Re != 0)
+			if (z->Im > 0)
+				if (z->Im != 1)
+					printf("%d + %di", z->Re, z->Im);
+				else 
+					printf("%d + i", z->Re);
+			else
+				if (z->Im != -1)
+					printf("%d - %di", z->Re, -1 * z->Im);
+				else 
+					printf("%d - i", z->Re);
+		else 
+			if (z->Im == 1)
+				printf("i");
+			else if (z->Im == -1)
+				printf("-i");
+			else
+				printf("%di", z->Im);
+	
+}
+
 static ValuesInfo* complexInfo = NULL;
 
 ValuesInfo* GetComplexValuesInfo(){
@@ -31,6 +58,7 @@ ValuesInfo* GetComplexValuesInfo(){
 		complexInfo->Sum = ComplexSum;
 		complexInfo->Mult = ComplexMult;
 		complexInfo->Set = ComplexSet;
+		complexInfo->Print = ComplexPrint;
 	}
 	return complexInfo;
 }
