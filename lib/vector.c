@@ -59,7 +59,7 @@ const void* VectorGet(const Vector* vector, int index){
 	// original element (instead use VectorSet()) 
 	// so I had ad idea to return a copy
 	// but it can cause some issues with memory I think
-	// user will be forced to free memoty by himself
+	// user will be forced to free memory by himself
 	// so for now it just returns ptr to original data
 	if (vector == NULL)
 		return NULL; // NULL_PTR
@@ -71,8 +71,6 @@ const void* VectorGet(const Vector* vector, int index){
 }
 
 void VectorSet(Vector* vector, int index, const void* value){
-	// should also somehow check if vector->valuesInfo
-	// corresponds with value, but how?
 	if (vector == NULL)
 		return; // NULL_PTR
 	if (vector->data == NULL)
@@ -116,8 +114,6 @@ void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res){
 }
 
 void VectorDot(const Vector* vector1, const Vector* vector2, void* res){ 
-	// I don't know how to check res type in that case
-	
 	// also I probably should've put conjugation function
 	// for types to implement correct dot product for
 	// something like complex numbers but I didn't do it for now
