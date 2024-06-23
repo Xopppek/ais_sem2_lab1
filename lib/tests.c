@@ -15,8 +15,8 @@ void RunTests(){
 
 	Vector* sum;
 
-	Integer* dot_integer;
-	Complex* dot_complex;
+	Integer* dotInteger = (Integer*) malloc(1 * sizeof(Integer));
+	Complex* dotComplex = (Complex*) malloc(1 * sizeof(Complex));
 	
 	int dims[num_vectors];
 	
@@ -310,58 +310,51 @@ void RunTests(){
 		switch(i){
 			case 0: // correct integer
 				// v0 * v1 = [-5, 0] * [4, 1] = -20	
-				dot_integer = (Integer*) VectorDot(vectors[0], vectors[1]);
+				VectorDot(vectors[0], vectors[1], dotInteger);
 				
-				assert(dot_integer->value == -20);
-
-				free(dot_integer);
+				assert(dotInteger->value == -20);
 				break;
 			case 1: // incorrect try to Dot vectors with different dim
 				// v1 * v3 = [4, 1] * [0, 1, 2]
-				// NULL should be returned
-				dot_integer = (Integer*) VectorDot(vectors[7], vectors[3]);
+				// res (dotInteger) should stay unchanged 
+				dotInteger->value = 2;
+				VectorDot(vectors[7], vectors[3], dotInteger);
 
-				assert(dot_integer == NULL);
-
-				free(dot_integer);
+				assert(dotInteger->value == 2);
 				break;
 			case 2: // correct complex
 				// v9 * v10 = [0 + 2i, 0 + 3i, 2, -2 + 5i] + 
 				// * [-1 + 4i, 1 + i, -3 + 6i, 3 - i] =
 				// -18 + 39i
-				dot_complex = (Complex*) VectorDot(vectors[9], vectors[10]);
+				VectorDot(vectors[9], vectors[10], dotComplex);
 
-				assert(dot_complex->Re == -18);
-				assert(dot_complex->Im == 30);	
-					
-				free(dot_complex);
+				assert(dotComplex->Re == -18);
+				assert(dotComplex->Im == 30);	
 				break;
 			case 3: // incorrect try to Dot vectors with 
 				// different values
 				// v4 * v0 = [-5, 0]  * [0 + 2i, 1 + i]
 				// there is no casting, operation is incorrect
-				// NULL should be returned
-				dot_complex = (Complex*) VectorDot(vectors[0], vectors[4]);
+				// res should stay unchanged
+				dotComplex->Re = 2;
+				dotComplex->Im = 2;
+				VectorDot(vectors[0], vectors[4], dotComplex);
 
-				assert(dot_complex == NULL);
-
-				free(dot_complex);
+				assert(dotComplex->Re == 2);
+				assert(dotComplex->Im == 2);
 				break;
 			case 4: // incorrect one of the vectors is NULL
-				// NULL should be returned
-				dot_integer = (Integer*) VectorDot(vectors[3], vectors[5]);
+				// res should stay unchanged
+				dotInteger->value = 2;
+				VectorDot(vectors[3], vectors[5], dotInteger);
 					
-				assert(dot_integer == NULL);
-
-				free(dot_integer);
+				assert(dotInteger->value == 2);
 				break;
 			case 5: // correct integer
 				// v2 * v3 = [-5, -4, -3] * [0, 1, 2] = -10
-				dot_integer = (Integer*) VectorDot(vectors[2], vectors[3]);
+				VectorDot(vectors[2], vectors[3], dotInteger);
 
-				assert(dot_integer->value == -10);
-
-				free(dot_integer);
+				assert(dotInteger->value == -10);
 				break;
 		}
 		printf("- Test %d passed\n", i+1);
@@ -371,6 +364,8 @@ void RunTests(){
 
 	printf("All tests passed\n");
 
+	free(dotInteger);
+	free(dotComplex);
 	free(complexes);
 	free(integers);
 	for (int i = 0; i < num_vectors; i++)

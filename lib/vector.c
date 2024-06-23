@@ -19,8 +19,6 @@ Vector* VectorFromArray(
 		const int dim, 
 		const void* array
 		){
-	// should check if array type corresponds with
-	// valuesInfo but I don't know how to do it
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	if (array == NULL)
@@ -105,17 +103,8 @@ void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res){
 				);	
 }
 
-void* VectorDot(const Vector* vector1, const Vector* vector2){
-	// there user is forced to free memoty by himself
-	// I didn't use (Vector*, Vector*, void* res) like before
-	// (it would be more clear for user to free void* res created
-	// by himself)
-	// because I don't know how to check res type in that case
-	// I could probably put something like type information 
-	// inside of the type structure, but I didn't actually want to
-	// It could cause some issues with new user types
-	// Something like hash fuction could be used
-	// but again I didn't want to overcomplicate 
+void VectorDot(const Vector* vector1, const Vector* vector2, void* res){ 
+	// I don't know how to check res type in that case
 	
 	// also I probably should've put conjugation function
 	// for types to implement correct dot product for
@@ -123,27 +112,25 @@ void* VectorDot(const Vector* vector1, const Vector* vector2){
 	// so this fucnction is just sum of pairwise products
 	// not exactly the dot product :D
 	if ((vector1 == NULL) || (vector2 == NULL))
-		return NULL; // NULL_PTR
+		return; // NULL_PTR
 	if ((vector1->data == NULL) || (vector2->data == NULL))
-		return NULL; // NULL_PTR
+		return; // NULL_PTR
 	if ((vector1->dim != vector2->dim))
-		return NULL; // DIM_NOT_CORRESPOND
+		return; // DIM_NOT_CORRESPOND
 	if (vector1->valuesInfo != vector2->valuesInfo)
-		return NULL; // VALUES_NOT_CORRESPOND
+		return; // VALUES_NOT_CORRESPOND
 	int dim = vector1->dim;
 	ValuesInfo* info = vector1->valuesInfo;
 	int elemSize = info->size;
-	void* result = malloc(1 * elemSize);
 	void* temp = malloc(1 * elemSize);
-	info->Mult(vector1->data, vector2->data, result);
+	info->Mult(vector1->data, vector2->data, res);
 	for (int i = 1; i < dim; i++){
 		info->Mult(
 			vector1->data + i * elemSize,
 			vector2->data + i * elemSize,
 			temp
 			);
-		info->Sum(result, temp, result);
+		info->Sum(res, temp, res);
 	}
 	free(temp);
-	return result;
 }

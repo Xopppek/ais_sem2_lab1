@@ -27,6 +27,6 @@ const void* VectorGet(const Vector* vector, const int index);
 void VectorSet(Vector* vector, const int index, const void* value);
 
 void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res);
-void* VectorDot(const Vector* vector1, const Vector* vector2); // free after usage
+void VectorDot(const Vector* vector1, const Vector* vector2, void* res);
 
 #endif // VECTOR_H

@@ -86,10 +86,10 @@ int main(){
 	ValuesInfo* info;
 	ValuesInfo* info1;
 	ValuesInfo* info2;
-	Integer input_integer;
-	Complex input_complex;
-	Integer* dot_integer;
-	Complex* dot_complex;
+	Integer inputInteger;
+	Complex inputComplex;
+	Integer* dotInteger = (Integer*) malloc(1 * sizeof(Integer));
+	Complex* dotComplex = (Complex*) malloc(1 * sizeof(Complex));
 
 	do{
 		printf("Input: ");
@@ -147,11 +147,11 @@ int main(){
 				for (int i = 0; i < (vectors[v_index])->dim; i++){
 					printf("| Insert %d element: ", i+1);
 					if (info == integerInfo){
-						InputInteger(&input_integer);
-						VectorSet(vectors[v_index], i, &input_integer);
+						InputInteger(&inputInteger);
+						VectorSet(vectors[v_index], i, &inputInteger);
 					}else if(info == complexInfo){
-						InputComplex(&input_complex);
-						VectorSet(vectors[v_index], i, &input_complex);	
+						InputComplex(&inputComplex);
+						VectorSet(vectors[v_index], i, &inputComplex);	
 					}
 				}
 				printf("Vector %d = ", input_v_index);
@@ -291,15 +291,13 @@ int main(){
 					continue;
 				}
 				if (info1 == integerInfo){
-					dot_integer = VectorDot(vectors[v_index1], vectors[v_index2]);
+					VectorDot(vectors[v_index1], vectors[v_index2], dotInteger);
 					printf("Vector %d * Vector %d = %d\n\n", v_index1+1, v_index2+1, 
-										dot_integer->value);
-					free(dot_integer);		
+										dotInteger->value);
 				}else if (info1 == complexInfo){
-					dot_complex = VectorDot(vectors[v_index1], vectors[v_index2]);
+					VectorDot(vectors[v_index1], vectors[v_index2], dotComplex);
 					printf("Vector %d * Vector %d = %d + %di\n\n", v_index1+1, v_index2+1, 
-									dot_complex->Re, dot_complex->Im);
-					free(dot_complex);		
+									dotComplex->Re, dotComplex->Im);
 				}
 				break;
 			case(DELETE):
@@ -332,6 +330,8 @@ int main(){
 	for (int i = 0; i < num_vectors; i++)
 		VectorFree(vectors + i);
 	free(vectors);
+	free(dotInteger);
+	free(dotComplex);
 	free(integerInfo);
 	free(complexInfo);
 	
