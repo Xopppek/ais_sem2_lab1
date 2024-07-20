@@ -6,10 +6,10 @@ struct Vector
 {
 	int dim;
 	void* data;
-	ValuesInfo* valuesInfo; // const
+	const ValuesInfo* valuesInfo; // const
 };
 
-Vector* VectorInit(ValuesInfo* valuesInfo, int dim){ //const 
+Vector* VectorInit(const ValuesInfo* valuesInfo, int dim){ //const 
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	Vector* vector = (Vector*) malloc(sizeof(Vector));
@@ -21,7 +21,7 @@ Vector* VectorInit(ValuesInfo* valuesInfo, int dim){ //const
 	return vector;
 }
 
-Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array){ //const
+Vector* VectorFromArray(const ValuesInfo* valuesInfo, int dim, const void* array){ //const
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	if (array == NULL)
@@ -80,7 +80,7 @@ int VectorGetDim(const Vector* vector){
 	return vector->dim;
 }
 
-ValuesInfo* VectorGetValuesInfo(const Vector* vector){
+const ValuesInfo* VectorGetValuesInfo(const Vector* vector){
 	return vector->valuesInfo;
 }
 
@@ -123,7 +123,7 @@ void VectorDot(const Vector* vector1, const Vector* vector2, void* res){
 	if (vector1->valuesInfo != vector2->valuesInfo)
 		return; // VALUES_NOT_CORRESPOND
 	int dim = vector1->dim;
-	ValuesInfo* info = vector1->valuesInfo;
+	const ValuesInfo* info = vector1->valuesInfo;
 	int elemSize = info->size;
 	void* temp = malloc(1 * elemSize);
 	info->Mult(vector1->data, vector2->data, res);

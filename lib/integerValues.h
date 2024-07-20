@@ -8,6 +8,6 @@ typedef struct Integer
 	int value;
 } Integer;
 
-ValuesInfo* GetIntegerValuesInfo();
+const ValuesInfo* GetIntegerValuesInfo();
 
 #endif // INTEGER_VALUES_H

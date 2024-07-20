@@ -5,9 +5,9 @@
 
 typedef struct Vector Vector;
 
-Vector* VectorInit(ValuesInfo* valuesInfo, int dim);
+Vector* VectorInit(const ValuesInfo* valuesInfo, int dim);
 
-Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array);
+Vector* VectorFromArray(const ValuesInfo* valuesInfo, int dim, const void* array);
 
 void VectorFree(Vector** vector);
 
@@ -15,7 +15,7 @@ const void* VectorGet(const Vector* vector, int index);
 void VectorSet(Vector* vector, int index, const void* value);
 
 int VectorGetDim(const Vector* vector);
-ValuesInfo* VectorGetValuesInfo(const Vector* vector); // const
+const ValuesInfo* VectorGetValuesInfo(const Vector* vector); // const
 
 void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res);
 void VectorDot(const Vector* vector1, const Vector* vector2, void* res);

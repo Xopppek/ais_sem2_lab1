@@ -17,7 +17,7 @@ void IntegerPrint(const void* value){
 
 static ValuesInfo* integerInfo = NULL;
 
-ValuesInfo* GetIntegerValuesInfo(){
+const ValuesInfo* GetIntegerValuesInfo(){
 	if (integerInfo == NULL){
 		integerInfo = (ValuesInfo*) malloc(sizeof(ValuesInfo));
 		integerInfo->size = sizeof(Integer);

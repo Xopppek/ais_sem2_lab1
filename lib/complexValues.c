@@ -46,7 +46,7 @@ void ComplexPrint(const void* value){
 
 static ValuesInfo* complexInfo = NULL;
 
-ValuesInfo* GetComplexValuesInfo(){
+const ValuesInfo* GetComplexValuesInfo(){
 	if (complexInfo == NULL){
 		complexInfo = (ValuesInfo*) malloc(sizeof(ValuesInfo));
 		complexInfo->size = sizeof(Complex);
