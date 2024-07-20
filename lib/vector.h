@@ -15,7 +15,7 @@ const void* VectorGet(const Vector* vector, int index);
 void VectorSet(Vector* vector, int index, const void* value);
 
 int VectorGetDim(const Vector* vector);
-ValuesInfo* VectorGetValuesInfo(const Vector* vector);
+ValuesInfo* VectorGetValuesInfo(const Vector* vector); // const
 
 void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res);
 void VectorDot(const Vector* vector1, const Vector* vector2, void* res);

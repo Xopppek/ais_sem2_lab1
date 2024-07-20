@@ -7,7 +7,6 @@ typedef struct ValuesInfo
 	size_t size;
 	void (*Sum)(const void* a, const void* b, void* res);
 	void (*Mult)(const void* a, const void* b, void* res);
-	void (*Set)(void* ptr, const void* value);
 	void (*Print)(const void* value);
 } ValuesInfo;
 

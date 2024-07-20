@@ -18,11 +18,6 @@ void ComplexMult(const void* a, const void* b, void* res){
     res_->Im = a_->Re * b_->Im + b_->Re * a_->Im;
 }
 
-void ComplexSet(void* ptr, const void* value){
-	((Complex*) ptr)->Re = ((Complex*) value)->Re;
-	((Complex*) ptr)->Im = ((Complex*) value)->Im; 
-}
-
 void ComplexPrint(const void* value){
 	Complex* z = (Complex*) value;
 	if (z->Im == 0)
@@ -57,7 +52,6 @@ ValuesInfo* GetComplexValuesInfo(){
 		complexInfo->size = sizeof(Complex);
 		complexInfo->Sum = ComplexSum;
 		complexInfo->Mult = ComplexMult;
-		complexInfo->Set = ComplexSet;
 		complexInfo->Print = ComplexPrint;
 	}
 	return complexInfo;

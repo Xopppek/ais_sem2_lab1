@@ -10,10 +10,6 @@ void IntegerMult(const void* a, const void* b, void* res){
 	((Integer*) res)->value = ((Integer*) a)->value * ((Integer*) b)->value;
 }
 
-void IntegerSet(void* ptr, const void* value){
-	((Integer*) ptr)->value = ((Integer*) value)->value;
-}
-
 void IntegerPrint(const void* value){
 	int x = ((Integer*) value)->value;
 	printf("%d", x);
@@ -27,7 +23,6 @@ ValuesInfo* GetIntegerValuesInfo(){
 		integerInfo->size = sizeof(Integer);
 		integerInfo->Sum = IntegerSum;
 		integerInfo->Mult = IntegerMult;
-		integerInfo->Set = IntegerSet;
 		integerInfo->Print = IntegerPrint;
 	}
 	return integerInfo;

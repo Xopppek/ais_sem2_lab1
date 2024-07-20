@@ -6,10 +6,10 @@ struct Vector
 {
 	int dim;
 	void* data;
-	ValuesInfo* valuesInfo;
+	ValuesInfo* valuesInfo; // const
 };
 
-Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
+Vector* VectorInit(ValuesInfo* valuesInfo, int dim){ //const 
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	Vector* vector = (Vector*) malloc(sizeof(Vector));
@@ -21,7 +21,7 @@ Vector* VectorInit(ValuesInfo* valuesInfo, int dim){
 	return vector;
 }
 
-Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array){
+Vector* VectorFromArray(ValuesInfo* valuesInfo, int dim, const void* array){ //const
 	if (dim < 1)
 		return NULL; // INCORRECT_DIM
 	if (array == NULL)
@@ -42,15 +42,11 @@ void VectorFree(Vector** vector){
 	*vector = NULL;
 }
 
-void VectorFreeData(Vector* vector){
+static void VectorFreeData(Vector* vector){ 
 	if (vector == NULL)
 		return;
 	free(vector->data);
 	vector->data = NULL;
-	// if data == NULL vector can not be used
-	// this function shouldn't be used by user
-	// it is used in lib functions to free
-	// data in res vector for functions like Sum
 }
 
 const void* VectorGet(const Vector* vector, int index){
@@ -66,7 +62,7 @@ const void* VectorGet(const Vector* vector, int index){
 		return NULL; // NULL_PTR
 	if ((vector->dim <= index) || (index < 0))
 		return NULL; // OUT_OF_RANGE
-	return vector->data + index * vector->valuesInfo->size; 	
+	return ((char*) vector->data) + index * vector->valuesInfo->size;
 }
 
 void VectorSet(Vector* vector, int index, const void* value){
@@ -76,8 +72,8 @@ void VectorSet(Vector* vector, int index, const void* value){
 		return; // NULL_PTR
 	if ((vector->dim <= index) || (index < 0))
 		return; // OUT_OF_RANGE
-	vector->valuesInfo->Set(vector->data + 
-			index * vector->valuesInfo->size, value);
+	memcpy((char*) vector->data + index * vector->valuesInfo->size, 
+			value, vector->valuesInfo->size);
 }
 
 int VectorGetDim(const Vector* vector){
@@ -106,9 +102,9 @@ void VectorSum(const Vector* vector1, const Vector* vector2, Vector* res){
         res->data = malloc(dim * elemSize);
 	for (int i = 0; i < dim; i++)
 		res->valuesInfo->Sum(
-				vector1->data + i * elemSize,
-				vector2->data + i * elemSize,
-				res->data + i * elemSize
+				(char*) vector1->data + i * elemSize, // explicit cast
+				(char*) vector2->data + i * elemSize,
+				(char*) res->data + i * elemSize
 				);	
 }
 
@@ -116,7 +112,7 @@ void VectorDot(const Vector* vector1, const Vector* vector2, void* res){
 	// also I probably should've put conjugation function
 	// for types to implement correct dot product for
 	// something like complex numbers but I didn't do it for now
-	// so this fucnction is just sum of pairwise products
+	// so this function is just sum of pairwise products
 	// not exactly the dot product :D
 	if ((vector1 == NULL) || (vector2 == NULL))
 		return; // NULL_PTR
@@ -133,8 +129,8 @@ void VectorDot(const Vector* vector1, const Vector* vector2, void* res){
 	info->Mult(vector1->data, vector2->data, res);
 	for (int i = 1; i < dim; i++){
 		info->Mult(
-			vector1->data + i * elemSize,
-			vector2->data + i * elemSize,
+			(char*) vector1->data + i * elemSize,
+			(char*) vector2->data + i * elemSize,
 			temp
 			);
 		info->Sum(res, temp, res);
